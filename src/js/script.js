@@ -19,23 +19,6 @@ $(document).ready(function(){
           .addClass('catalog__tab_active').siblings().removeClass('catalog__tab_active')
           .closest('div.container').find('div.catalog__content').removeClass('catalog__content_active').eq($(this).index()).addClass('catalog__content_active');
       });
-
-    //   $('.catalog-item__link').each(function(i) {
-    //       $(this).on('click', function(e) {
-    //           e.preventDefault();
-    //           $('.catalog-item__content').eq(i).toggleClass('catalog-item__content_active');
-    //           $('.catalog-item__list').eq(i).toggleClass('catalog-item__list_active');
-    //       })
-    //   });
-
-    //   $('.catalog-item__back').each(function(i) {
-    //     $(this).on('click', function(e) {
-    //         e.preventDefault();
-    //         $('.catalog-item__content').eq(i).toggleClass('catalog-item__content_active');
-    //         $('.catalog-item__list').eq(i).toggleClass('catalog-item__list_active');
-    //     })
-    //   });
-
       function toogleSlide(item) {
         $(item).each(function(i) {
             $(this).on('click', function(e) {
@@ -62,3 +45,33 @@ $(document).ready(function(){
         })
       });
   });
+  function validateForms(form){
+    $(form).validate({
+        rules: {
+            name: {
+                required: true,
+                minlength: 2
+            },
+            phone: "required",
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            name: {
+                required: "Пожалуйста, введите свое имя",
+                minlength: jQuery.validator.format("Введите {0} символа!")
+              },
+            phone: "Пожалуйста, введите свой номер телефона",
+            email: {
+              required: "Пожалуйста, введите свою почту",
+              email: "Неправильно введен адрес почты"
+            }
+        }
+    });
+};
+
+validateForms('#consultation-form');
+validateForms('#consultation form');
+validateForms('#order form');
