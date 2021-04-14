@@ -1,9 +1,10 @@
 $(document).ready(function(){
-  $('.carousel__inner').slick({
+  // Карусель  
+    $('.carousel__inner').slick({
       speed: 1200,
       adaptiveHeight: true,
-      prevArrow: '<button type="button" class="slick-prev"><img src="icons/left.svg"></button>',
-      nextArrow: '<button type="button" class="slick-next"><img src="icons/right.svg"></button>',
+      prevArrow: '<button type="button" class="slick-prev"><img src="icons/prev_arrow.svg"></button>',
+      nextArrow: '<button type="button" class="slick-next"><img src="icons/next_arrow.svg"></button>',
       responsive: [
           {
               breakpoint: 992,
@@ -14,7 +15,7 @@ $(document).ready(function(){
           }
       ]
   });
-  
+  // Табы
   $('ul.catalog__tabs').on('click', 'li:not(.catalog__tab_active)', function() {
       $(this)
         .addClass('catalog__tab_active').siblings().removeClass('catalog__tab_active')
@@ -34,7 +35,7 @@ $(document).ready(function(){
   toggleSlide('.catalog-item__link');
   toggleSlide('.catalog-item__back');
 
-  // Modal
+  // Modal - Модальные окна
 
   $('[data-modal=consultation]').on('click', function() {
       $('.overlay, #consultation').fadeIn('slow');
@@ -49,7 +50,7 @@ $(document).ready(function(){
           $('.overlay, #order').fadeIn('slow');
       })
   });
-
+  // Валидация форм
   function validateForms(form){
       $(form).validate({
           rules: {
@@ -81,6 +82,7 @@ $(document).ready(function(){
   validateForms('#consultation form');
   validateForms('#order form');
 
+  // Маска ввода
   $('input[name=phone]').mask("+380 (99) 999-99-99");
 
   $('form').submit(function(e) {
@@ -97,5 +99,18 @@ $(document).ready(function(){
           $('form').trigger('reset');
       });
       return false;
+  });
+  // Плавный скрол
+  $(window).scroll(function () {
+    if ($(this).scrollTop() > 1600) {
+        $('.pageup').fadeIn();
+    } else {
+        $('.pageup').fadeOut();
+    }
+  });
+  $("a[href^='#']").click(function() {
+    const _href = $(this).attr("href");
+    $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
+    return false;
   });
 });  
